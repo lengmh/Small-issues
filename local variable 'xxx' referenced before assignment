@@ -1,0 +1,30 @@
+# python： local variable 'xxx' referenced before assignment
+
+xxx = 23
+def PrintFileName(strFileName): 
+    if xxx == 23:
+        print strFileName
+        xxx = 24
+
+PrintFileName("file")
+
+会报错 local variable 'xxx' referenced before assignment
+如下：
+Traceback (most recent call last):
+  File "C:/Users/Desktop/del.py", line 7, in <module>
+    PrintFileName("file")
+  File "C:/Users/jihite/Desktop/del.py", line 3, in PrintFileName
+    if xxx == 23:
+UnboundLocalError: local variable 'xxx' referenced before assignment
+意思说局部变量‘xxx’前边没有定义，但是最前面不是定义了吗。
+这里提示是局部变量，但一开始定义的为全局变量，如果这里定义的就是全局变量可以通过关键字global来说明。
+  
+xxx = 23
+def PrintFileName(strFileName): 
+    if xxx == 23:
+        global xxx
+        print strFileName
+        xxx = 24
+
+PrintFileName("file")
+运行正常。
